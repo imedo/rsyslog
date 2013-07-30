@@ -21,6 +21,10 @@ $template PerHostNewsErr,"<%= @log_dir %>/<%= @per_host_dir %>/news.err"
 $template PerHostNewsNotice,"<%= @log_dir %>/<%= @per_host_dir %>/news.notice"
 $template PerHostDebug,"<%= @log_dir %>/<%= @per_host_dir %>/debug"
 $template PerHostMessages,"<%= @log_dir %>/<%= @per_host_dir %>/messages"
+$template PerHostHaproxy,"<%= @log_dir %>/<%= @per_host_dir %>/haproxy"
+
+if $programname == 'haproxy' then -?PerHostHaproxy
+& ~
 
 auth,authpriv.*         ?PerHostAuth
 *.*;auth,authpriv.none  -?PerHostSyslog

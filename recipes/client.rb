@@ -22,9 +22,13 @@ include_recipe "rsyslog"
 if !node['rsyslog']['server'] and node['rsyslog']['server_ip'].nil? and Chef::Config[:solo]
   Chef::Log.fatal("Chef Solo does not support search, therefore it is a requirement of the rsyslog::client recipe that the attribute 'server_ip' is set when using Chef Solo. 'server_ip' is not set.")
 elsif !node['rsyslog']['server']
-  rsyslog_server = node['rsyslog']['server_ip'] ||
+  if search(:node, node['rsyslog']['server_search']).first["network"]["interfaces"]["eth1"]
+    rsyslog_server = node['rsyslog']['server_ip'] || 
+                  search(:node, node['rsyslog']['server_search']).first["network"]["interfaces"]["eth1"]["addresses"].keys[1]
+  else
+    rsyslog_server = node['rsyslog']['server_ip'] ||
                    search(:node, node['rsyslog']['server_search']).first['ipaddress'] rescue nil
-
+  end
   if rsyslog_server.nil?
     Chef::Application.fatal!("The rsyslog::client recipe was unable to determine the remote syslog server. Checked both the server_ip attribute and search()")
   end
