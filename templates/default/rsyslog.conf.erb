@@ -27,6 +27,7 @@ $ModLoad imtcp
 $InputTCPServerRun <%= node['rsyslog']['port'] %>
 $ModLoad imudp
 $UDPServerRun <%= node['rsyslog']['port'] %>
+<% end -%>
 
 ###########################
 #### GLOBAL DIRECTIVES ####
