@@ -32,7 +32,7 @@ if $programname == 'haproxy' then -?PerHostHaproxy
 if $programname == 'monit' then -?PerHostMonit
 & ~
 
-if $programname == 'apache' then -?PerHostApache
+if $programname == 'apache2' then -?PerHostApache
 & ~
 
 auth,authpriv.*         ?PerHostAuth
