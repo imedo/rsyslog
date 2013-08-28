@@ -24,7 +24,10 @@ $template PerHostMessages,"<%= @log_dir %>/<%= @per_host_dir %>/messages"
 $template PerHostHaproxy,"<%= @log_dir %>/<%= @per_host_dir %>/haproxy"
 $template PerHostMonit,"<%= @log_dir %>/<%= @per_host_dir %>/monit"
 $template PerHostApache,"<%= @log_dir %>/<%= @per_host_dir %>/apache"
+$template PerHostRedis,"<%= @log_dir %>/<%= @per_host_dir %>/redis"
 
+if $programname == 'redis' then -?PerHostRedis
+& ~
 
 if $programname == 'haproxy' then -?PerHostHaproxy
 & ~
